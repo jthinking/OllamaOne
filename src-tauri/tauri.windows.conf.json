@@ -8,7 +8,7 @@
         "title": "OllamaOne",
         "width": 1024,
         "center": true,
-        "decorations": true,
+        "decorations": false,
         "visible": false,
         "titleBarStyle": "Overlay",
         "hiddenTitle": true
