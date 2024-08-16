@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "OllamaOne - Ollama GUI client."
+  name: "OllamaOne"
   text: "OllamaOne is an Ollama GUI client."
   tagline: My great project tagline
   actions:
@@ -22,4 +22,3 @@ features:
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
-
