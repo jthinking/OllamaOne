@@ -47,7 +47,7 @@
     }
   },
   "productName": "OllamaOne",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "identifier": "com.jthinking.ollamaone",
   "plugins": {},
   "app": {
