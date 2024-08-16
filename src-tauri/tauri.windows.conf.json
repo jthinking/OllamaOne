@@ -1,0 +1,18 @@
+{
+  "app": {
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 700,
+        "resizable": true,
+        "title": "OllamaOne",
+        "width": 1024,
+        "center": true,
+        "decorations": true,
+        "visible": false,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true
+      }
+    ]
+  }
+}
