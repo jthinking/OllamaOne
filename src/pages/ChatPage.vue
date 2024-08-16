@@ -1987,4 +1987,8 @@ with open(f'/mount/{filename}', 'wb') as f:
   height: 35px;
   min-width: 35px;
 }
+.md-editor-preview {
+  word-break: keep-all;
+  word-wrap: break-word;
+}
 </style>
