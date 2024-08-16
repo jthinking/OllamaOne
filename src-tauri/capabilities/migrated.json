@@ -12,6 +12,7 @@
     "menu:default",
     "tray:default",
     "window:allow-maximize",
+    "window:allow-toggle-maximize",
     "window:allow-unmaximize",
     "window:allow-minimize",
     "window:allow-unminimize",
