@@ -394,8 +394,12 @@
       >
         <q-menu :offset="[0, 5]">
           <q-list dense style="min-width: 100px">
-            <q-item clickable>
-              <q-item-section>llama2</q-item-section>
+            <q-item
+              clickable
+              v-for="(model, index) in MODEL_INFO_LIST"
+              :key="index"
+            >
+              <q-item-section>{{ model.model }}</q-item-section>
               <q-item-section side>
                 <q-icon name="keyboard_arrow_right" />
               </q-item-section>
@@ -403,244 +407,26 @@
               <q-menu anchor="top end" self="top start">
                 <q-list>
                   <q-item
+                    v-for="(tag, tagIndex) in model.tags"
+                    :key="tagIndex"
                     dense
                     clickable
                     v-close-popup
-                    @click="selectModel('llama2:latest')"
+                    @click="selectModel(model.model + ':' + tag.name)"
                   >
-                    <q-item-section>llama2:latest</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('llama2:7b')"
-                  >
-                    <q-item-section>llama2:7b</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('llama2:13b')"
-                  >
-                    <q-item-section>llama2:13b</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('llama2:70b')"
-                  >
-                    <q-item-section>llama2:70b</q-item-section>
+                    <!-- <q-item-section>{{
+                      model.model + ":" + tag.name
+                    }}</q-item-section> -->
+                    <q-item-section>
+                      <q-item-label>
+                        {{ model.model + ":" + tag.name }}
+                      </q-item-label>
+                    </q-item-section>
                   </q-item>
                 </q-list>
               </q-menu>
             </q-item>
 
-            <q-item clickable>
-              <q-item-section>qwen</q-item-section>
-              <q-item-section side>
-                <q-icon name="keyboard_arrow_right" />
-              </q-item-section>
-
-              <q-menu anchor="top end" self="top start">
-                <q-list>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('qwen:latest')"
-                  >
-                    <q-item-section>qwen:latest</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('qwen:4b')"
-                  >
-                    <q-item-section>qwen:4b</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('qwen:7b')"
-                  >
-                    <q-item-section>qwen:7b</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('qwen:14b')"
-                  >
-                    <q-item-section>qwen:14b</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('qwen:72b')"
-                  >
-                    <q-item-section>qwen:72b</q-item-section>
-                  </q-item>
-                </q-list>
-              </q-menu>
-            </q-item>
-
-            <q-item clickable>
-              <q-item-section>mistral</q-item-section>
-              <q-item-section side>
-                <q-icon name="keyboard_arrow_right" />
-              </q-item-section>
-
-              <q-menu anchor="top end" self="top start">
-                <q-list>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('mistral:latest')"
-                  >
-                    <q-item-section>mistral:latest</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('mistral:7b')"
-                  >
-                    <q-item-section>mistral:7b</q-item-section>
-                  </q-item>
-                </q-list>
-              </q-menu>
-            </q-item>
-
-            <q-item clickable>
-              <q-item-section>codellama</q-item-section>
-              <q-item-section side>
-                <q-icon name="keyboard_arrow_right" />
-              </q-item-section>
-
-              <q-menu anchor="top end" self="top start">
-                <q-list>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('codellama:latest')"
-                  >
-                    <q-item-section>codellama:latest</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('codellama:7b')"
-                  >
-                    <q-item-section>codellama:7b</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('codellama:13b')"
-                  >
-                    <q-item-section>codellama:13b</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('codellama:34b')"
-                  >
-                    <q-item-section>codellama:34b</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('codellama:70b')"
-                  >
-                    <q-item-section>codellama:70b</q-item-section>
-                  </q-item>
-                </q-list>
-              </q-menu>
-            </q-item>
-
-            <q-item clickable>
-              <q-item-section>gemma</q-item-section>
-              <q-item-section side>
-                <q-icon name="keyboard_arrow_right" />
-              </q-item-section>
-
-              <q-menu anchor="top end" self="top start">
-                <q-list>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('gemma:latest')"
-                  >
-                    <q-item-section>gemma:latest</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('gemma:2b')"
-                  >
-                    <q-item-section>gemma:2b</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('gemma:7b')"
-                  >
-                    <q-item-section>gemma:7b</q-item-section>
-                  </q-item>
-                </q-list>
-              </q-menu>
-            </q-item>
-
-            <q-item clickable>
-              <q-item-section>yi</q-item-section>
-              <q-item-section side>
-                <q-icon name="keyboard_arrow_right" />
-              </q-item-section>
-
-              <q-menu anchor="top end" self="top start">
-                <q-list>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('yi:latest')"
-                  >
-                    <q-item-section>yi:latest</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('yi:6b')"
-                  >
-                    <q-item-section>yi:6b</q-item-section>
-                  </q-item>
-                  <q-item
-                    dense
-                    clickable
-                    v-close-popup
-                    @click="selectModel('yi:34b')"
-                  >
-                    <q-item-section>yi:34b</q-item-section>
-                  </q-item>
-                </q-list>
-              </q-menu>
-            </q-item>
             <!-- <q-separator />
             <q-item
               clickable
@@ -1084,6 +870,7 @@ import {
   getCurrentDate,
   formatDate,
 } from "../utils/format";
+import { MODEL_INFO_LIST } from "../service/models";
 import { fetch } from "@tauri-apps/plugin-http";
 import { MdPreview, MdCatalog } from "md-editor-v3";
 import "md-editor-v3/lib/preview.css";
@@ -1963,6 +1750,7 @@ with open(f'/mount/{filename}', 'wb') as f:
       ollamaURL,
       ollamaConnectMsg,
       connectOllama,
+      MODEL_INFO_LIST,
     };
   },
 });
