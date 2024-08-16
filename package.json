@@ -1,0 +1,57 @@
+{
+  "name": "ollamaone",
+  "version": "0.0.1",
+  "description": "Ollama UI App",
+  "productName": "OllamaOne",
+  "author": "jiabochao <jiabochao@live.com>",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.vue ./",
+    "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
+    "test": "echo \"No test specified\" && exit 0",
+    "dev": "quasar dev",
+    "build": "quasar build"
+  },
+  "dependencies": {
+    "@datatraccorporation/markdown-it-mermaid": "^0.5.0",
+    "@quasar/extras": "^1.16.9",
+    "@tauri-apps/plugin-cli": "2.0.0-beta.2",
+    "@tauri-apps/plugin-clipboard-manager": "2.0.0-beta.2",
+    "@tauri-apps/plugin-http": "2.0.0-beta.2",
+    "@tauri-apps/plugin-shell": "2.0.0-beta.2",
+    "@tauri-apps/plugin-fs": "2.0.0-beta.2",
+    "axios": "^1.6.2",
+    "html-to-text": "^9.0.5",
+    "md-editor-v3": "^4.12.1",
+    "ollama": "^0.5.0",
+    "pinia": "^2.1.7",
+    "quasar": "^2.14.1",
+    "showdown": "^2.1.0",
+    "turndown": "^7.1.2",
+    "uuid": "^9.0.0",
+    "vue": "^3.3.11",
+    "vue-i18n": "^9.8.0",
+    "vue-markdown-render": "^2.1.1",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@arco-design/web-vue": "^2.53.3",
+    "@intlify/vite-plugin-vue-i18n": "^3.3.1",
+    "@quasar/app-vite": "^1.7.1",
+    "@quasar/quasar-app-extension-qmarkdown": "^2.0.0-beta.10",
+    "@tauri-apps/cli": "2.0.0-beta.11",
+    "@types/showdown": "^2.0.0",
+    "@types/turndown": "^5.0.1",
+    "autoprefixer": "^10.4.2",
+    "eslint": "^8.10.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-vue": "^9.0.0",
+    "postcss": "^8.4.14",
+    "prettier": "^2.5.1"
+  },
+  "engines": {
+    "node": "^24 || ^22 || ^20 || ^18",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
+}

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading</title>
+    <style>
+      /* 对 loading  整体布局*/
+      .loading-wrapper {
+        width: 100px;
+        height: 100px;
+        background-color: rgba(0, 0, 0, 0.8);
+        border-radius: 10px;
+        color: #fff;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      /* loading 动画图像父级的布局 */
+      .loading-view {
+        height: 40px;
+        position: relative;
+      }
+
+      /*  */
+      /* 1. 以下实现type=1的样式*/
+      /*  */
+
+      .container1,
+      .container2 {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        /* border: 1px solid #ff0000; */
+        top: 0;
+        left: 50%;
+        margin-left: -20px;
+        position: absolute;
+      }
+
+      .container2 {
+        transform: rotate(45deg);
+      }
+
+      .circle,
+      .bounce {
+        width: 10px;
+        height: 10px;
+        background-color: #fff;
+        border-radius: 50%;
+        /* 设置小球动画 */
+        animation: loading 1.2s both infinite;
+      }
+
+      .circle {
+        position: absolute;
+      }
+
+      /* 设置小球的相对位置 */
+      .circle1 {
+        top: 0;
+        left: 0;
+      }
+
+      .circle2 {
+        top: 0;
+        right: 0;
+      }
+
+      .circle3 {
+        bottom: 0;
+        right: 0;
+      }
+
+      .circle4 {
+        bottom: 0;
+        left: 0;
+      }
+
+      /* 设置延时 */
+      .container1 .circle1 {
+        animation-delay: 0s;
+      }
+
+      .container2 .circle1 {
+        animation-delay: 0.2s;
+      }
+
+      .container1 .circle2 {
+        animation-delay: 0.3s;
+      }
+
+      .container2 .circle2 {
+        animation-delay: 0.4s;
+      }
+
+      .container1 .circle3 {
+        animation-delay: 0.5s;
+      }
+
+      .container2 .circle3 {
+        animation-delay: 0.6s;
+      }
+
+      .container1 .circle4 {
+        animation-delay: 0.7s;
+      }
+
+      .container2 .circle5 {
+        animation-delay: 0.8s;
+      }
+
+      @keyframes loading {
+        0% {
+          transform: scale(0);
+        }
+
+        40% {
+          transform: scale(1);
+        }
+
+        80% {
+          transform: scale(0);
+        }
+
+        100% {
+          transform: scale(0);
+        }
+      }
+
+      /*  */
+      /* 2. 以下实现type=2的样式 */
+      /*  */
+
+      .bounce-view {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .bounce {
+        /* 设置小球形状的样式几乎和type=1一样，重复利用了 */
+        display: inline-block;
+      }
+
+      /* 设置延迟 */
+      .bounce1 {
+        animation-delay: -0.32s;
+      }
+
+      .bounce2 {
+        animation-delay: -0.16s;
+      }
+
+      .bounce3 {
+        animation-delay: 0s;
+      }
+
+      /*  */
+      /* 3. 以下实现type=3的样式 */
+      /*  */
+
+      .wave {
+        width: 100px;
+        height: 40px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      .react {
+        width: 3px;
+        height: 40px;
+        background-color: #fff;
+        animation: waveLoading 1.2s both infinite;
+      }
+
+      /* 设置延时 */
+      .react1 {
+        animation-delay: 0s;
+      }
+      .react2 {
+        animation-delay: -1.1s;
+      }
+      .react3 {
+        animation-delay: -1s;
+      }
+      .react4 {
+        animation-delay: -0.9s;
+      }
+      .react5 {
+        animation-delay: -0.8s;
+      }
+
+      @keyframes waveLoading {
+        0% {
+          transform: scaleY(0.4);
+        }
+        20% {
+          transform: scaleY(1);
+        }
+        80% {
+          transform: scaleY(0.4);
+        }
+        100% {
+          transform: scaleY(0.4);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="splashscreenWrapper"></div>
+    <script>
+      /**
+       * type: loading 的类型，默认1
+       * tipLabel: loading 内的文本，默认 loading...
+       * wrap: loading 的父级
+       *
+       * @param {*} config 传入对象（含type/tipLabel/wrap）
+       */
+      function Loading(config) {
+        this.type = config.type || 1;
+        this.tipLabel = config.tipLabel || "loading...";
+        this.wrap = config.wrap || document.body;
+        this.loadingWrapper = null;
+      }
+
+      /* 初始化 loading 效果，在原型链上添加 init 方法 */
+      Loading.prototype.init = function () {
+        this.createDom();
+      };
+
+      /* 创建 loading 结构 */
+      Loading.prototype.createDom = function () {
+        // loading wrap的子盒子，即整个loading的内容盒子
+        var loadingWrapper = document.createElement("div");
+        loadingWrapper.className = "loading-wrapper";
+        // loading type对应的不同的动画
+        var loadingView = document.createElement("div");
+        loadingView.className = "loading-view";
+        // loading 内的文本标签
+        var tipView = document.createElement("div");
+        tipView.className = "tip-view";
+        tipView.innerText = this.tipLabel;
+        // 对 loading type的三种情形进行判断
+        switch (this.type) {
+          case 1:
+            html = `
+                <div class="container1">
+                    <div class="circle circle1"></div>
+                    <div class="circle circle2"></div>
+                    <div class="circle circle3"></div>
+                    <div class="circle circle4"></div>
+                </div>
+                <div class="container2">
+                    <div class="circle circle1"></div>
+                    <div class="circle circle2"></div>
+                    <div class="circle circle3"></div>
+                    <div class="circle circle4"></div>
+                </div>
+            `;
+            loadingView.innerHTML = html;
+            break;
+          case 2:
+            var html = `
+                <div class="bounce-view">
+                    <div class="bounce bounce1"></div>
+                    <div class="bounce bounce2"></div>
+                    <div class="bounce bounce3"></div>
+                </div>
+           `;
+            loadingView.innerHTML = html;
+            break;
+          case 3:
+            var html = `
+                <div class="wave">
+                    <div class="react react1"></div>
+                    <div class="react react2"></div>
+                    <div class="react react3"></div>
+                    <div class="react react4"></div>
+                    <div class="react react5"></div>
+                </div>
+           `;
+            loadingView.innerHTML = html;
+            break;
+          default:
+            break;
+        }
+        loadingWrapper.appendChild(loadingView);
+        loadingWrapper.appendChild(tipView);
+        this.wrap.appendChild(loadingWrapper);
+        this.loadingWrapper = loadingWrapper;
+      };
+
+      // 对loading隐藏
+      Loading.prototype.hide = function () {
+        this.wrap.removeChild(this.loadingWrapper);
+      };
+    </script>
+    <script>
+      window.onload = function () {
+        const wrapper = document.getElementById("splashscreenWrapper");
+        const load = new Loading({
+          type: 2,
+          tipLabel: "OllamaOne",
+          wrap: wrapper,
+        });
+        load.init();
+        // load.hide();
+      };
+    </script>
+  </body>
+</html>
