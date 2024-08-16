@@ -2,6 +2,8 @@
 
 Ollama UI App
 
+![screenshot](docs/public/screenshot.png)
+
 ## Features
 
 - [x] Generate a chat completion
@@ -9,7 +11,7 @@ Ollama UI App
 - [x] Delete a Model
 - [x] Pull a Model
 
-- config
+## Develop
 
 ```bash
 sea-orm-cli migrate generate create_config_table
@@ -21,19 +23,7 @@ rm -rf entity/src/*
 sea-orm-cli generate entity -o entity/src --lib --with-serde both
 ```
 
-- chat
-
-```bash
-sea-orm-cli migrate generate create_chat_table
-
-sea-orm-cli migrate fresh
-
-rm -rf entity/src/*
-
-sea-orm-cli generate entity -o entity/src --lib --with-serde both
-```
-
-## macOS 编译步骤
+## Build
 
 ```
 
